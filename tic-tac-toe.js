@@ -156,25 +156,21 @@ function createPlayerTag(name, element, playerNum) {
 };
 
 headerSection.addEventListener("submit", function(event){
-    if (event.target && event.target.className === "player1Form") {
+    if (event.target && event.target.classList.contains("player1Form")) {
         event.preventDefault();
         const form = event.target;
-        console.log(form)
         const inputElement = form.elements.player1Input;
         const inputVal = inputElement.value;
         player1.setPlayerName(inputVal);
         createPlayerTag(inputVal, form, 1);
-        console.log(inputVal);
     };
-    if (event.target && event.target.className === "player2Form") {
+    if (event.target && event.target.classList.contains("player2Form")) {
         event.preventDefault();
         const form = event.target;
-        console.log(form)
         const inputElement = form.elements.player2Input;
         const inputVal = inputElement.value;
         player2.setPlayerName(inputVal)
         createPlayerTag(inputVal, form, 2);
-        console.log(inputVal);
     };
 
 });
