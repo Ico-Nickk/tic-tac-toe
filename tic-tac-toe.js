@@ -1,4 +1,6 @@
-function player(name) {
+const player1 = (()=> {
+    let name = "";
+    const setName = (val) => {name = val};
     let currentScore = 0;
     let playerSymbol = "";
     const getScore = () => currentScore;
@@ -6,11 +8,21 @@ function player(name) {
     const resetScore = () => currentScore = 0;
     const setSymbol = (Symbol) => {playerSymbol = Symbol;};
     const getSymbol = () => playerSymbol;
-    return {name, getScore, addScore, resetScore, setSymbol, getSymbol};
-};
+    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setName};
+})();
 
-const player1 = player("james");
-const player2 = player("judy");
+const player2 = (()=> {
+    let name = "";
+    const setName = (val) => {name = val};
+    let currentScore = 0;
+    let playerSymbol = "";
+    const getScore = () => currentScore;
+    const addScore = () => { currentScore++;};
+    const resetScore = () => currentScore = 0;
+    const setSymbol = (Symbol) => {playerSymbol = Symbol;};
+    const getSymbol = () => playerSymbol;
+    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setName};
+})();
 
 const gameBoard = (()=>{
     
@@ -117,5 +129,21 @@ const gameBoard = (()=>{
 })();
 
 
-player1.setSymbol("x");
-player2.setSymbol("o");
+
+/*const diplayController =(() => {
+    let player1NameInput = document.getElementById("player1Name");
+    let player2NameInput = document.getElementById("player2Name");
+    const setPlayer1Name = (player) => {
+        ;
+    };
+    
+})();
+
+
+const headerSection = document.querySelector(".player-selection");
+headerSection.addEventListener("click", function(event){
+    if (event.target && event.target.id === "player1Name") {
+        const inputVal = event.target.value;
+        player1.setName(inputVal);
+    };
+});*/
