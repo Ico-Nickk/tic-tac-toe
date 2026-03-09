@@ -1,6 +1,9 @@
 const player1 = (()=> {
-    let name = "";
-    const setName = (val) => {name = val};
+    let name;
+    const setPlayerName = (val)=> {
+        name = val;
+    };
+    const getName = () => name;
     let currentScore = 0;
     let playerSymbol = "";
     const getScore = () => currentScore;
@@ -8,11 +11,15 @@ const player1 = (()=> {
     const resetScore = () => currentScore = 0;
     const setSymbol = (Symbol) => {playerSymbol = Symbol;};
     const getSymbol = () => playerSymbol;
-    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setName};
+    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setPlayerName, getName};
 })();
 
 const player2 = (()=> {
-    let name = "";
+    let name;
+    const setPlayerName = (val)=> {
+        name = val;
+    };
+    const getName = () => name;
     const setName = (val) => {name = val};
     let currentScore = 0;
     let playerSymbol = "";
@@ -21,7 +28,7 @@ const player2 = (()=> {
     const resetScore = () => currentScore = 0;
     const setSymbol = (Symbol) => {playerSymbol = Symbol;};
     const getSymbol = () => playerSymbol;
-    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setName};
+    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setPlayerName, getName};
 })();
 
 const gameBoard = (()=>{
@@ -130,7 +137,7 @@ const gameBoard = (()=>{
 
 
 
-/*const diplayController =(() => {
+const diplayController =(() => {
     let player1NameInput = document.getElementById("player1Name");
     let player2NameInput = document.getElementById("player2Name");
     const setPlayer1Name = (player) => {
@@ -139,11 +146,25 @@ const gameBoard = (()=>{
     
 })();
 
-
 const headerSection = document.querySelector(".player-selection");
-headerSection.addEventListener("click", function(event){
-    if (event.target && event.target.id === "player1Name") {
-        const inputVal = event.target.value;
-        player1.setName(inputVal);
+headerSection.addEventListener("submit", function(event){
+    if (event.target && event.target.className === "player1Form") {
+        event.preventDefault();
+        const form = event.target;
+        console.log(form)
+        const inputElement = form.elements.player1Input;
+        const inputVal = inputElement.value;
+        player1.setPlayerName(inputVal)
+        console.log(inputVal);
     };
-});*/
+    if (event.target && event.target.className === "player2Form") {
+        event.preventDefault();
+        const form = event.target;
+        console.log(form)
+        const inputElement = form.elements.player2Input;
+        const inputVal = inputElement.value;
+        player2.setPlayerName(inputVal)
+        console.log(inputVal);
+    };
+
+});
