@@ -147,6 +147,14 @@ const diplayController =(() => {
 })();
 
 const headerSection = document.querySelector(".player-selection");
+
+function createPlayerTag(name, element, playerNum) {
+    const nameTag = document.createElement("p");
+    nameTag.classList.add("playerTag");
+    nameTag.textContent = `player ${playerNum}: ${name}`;
+    element.replaceWith(nameTag);
+};
+
 headerSection.addEventListener("submit", function(event){
     if (event.target && event.target.className === "player1Form") {
         event.preventDefault();
@@ -154,7 +162,8 @@ headerSection.addEventListener("submit", function(event){
         console.log(form)
         const inputElement = form.elements.player1Input;
         const inputVal = inputElement.value;
-        player1.setPlayerName(inputVal)
+        player1.setPlayerName(inputVal);
+        createPlayerTag(inputVal, form, 1);
         console.log(inputVal);
     };
     if (event.target && event.target.className === "player2Form") {
@@ -164,6 +173,7 @@ headerSection.addEventListener("submit", function(event){
         const inputElement = form.elements.player2Input;
         const inputVal = inputElement.value;
         player2.setPlayerName(inputVal)
+        createPlayerTag(inputVal, form, 2);
         console.log(inputVal);
     };
 
