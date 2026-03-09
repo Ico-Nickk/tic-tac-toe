@@ -7,6 +7,50 @@
     <link rel="stylesheet" href="tic-tac-toe.css">
 </head>
 <body>
+    <div class="monitor-frame">
+        <!-- Top Section -->
+        <div class="player-selection">
+            <div class="selection-header">PLAYER SELECTION</div>
+            <div class="player-row">
+                <div class="select-group">
+                    <button class="select-btn">PLAYER 1: SELECT SYMBOL</button>
+                    <div class="symbol-toggles">
+                        <button class="x-btn">X</button> 
+                        <button class="o-btn">O</button>
+                    </div>
+                </div>
+                <div class="select-group">
+                    <button class="select-btn">PLAYER 2: SELECT SYMBOL</button>
+                    <div class="symbol-toggles">
+                        <button class="x-btn">X </button>
+                        <button class="o-btn">O</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="status-label">CURRENT TURN:</div>
+                <div class="status-value">PLAYER 1 (X)</div>
+                <div class="x-mark" style="font-size: 4rem; margin: 10px 0;">X</div>
+                <div class="status-label">GAME STATUS:</div>
+                <div class="status-value">IN PROGRESS</div>
+            </div>
+        
+            <div class="game-board">
+                <div class="cell x-mark">X</div>
+                <div class="cell o-mark">O</div>
+                <div class="cell x-mark">X</div>
+                <div class="cell x-mark">X</div>
+                <div class="cell o-mark">O</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell o-mark">O</div>
+                <div class="cell"></div>
+            </div>
+        </div>
+    </div>
     <script src="tic-tac-toe.js"></script>
 </body>
 </html>
