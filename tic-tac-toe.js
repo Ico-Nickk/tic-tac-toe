@@ -251,6 +251,11 @@ headerSection.addEventListener("click", (event) => {
     };
 });
 
+const gameStart = document.querySelector(".startBtn");
+gameStart.addEventListener("click", (event) => {
+    gameBoard.firstMove();
+})
+
 const gameBoardDisplay = document.querySelector(".game-board");
 gameBoardDisplay.addEventListener("click", (event)=> {
     switch (event.target.id) {
