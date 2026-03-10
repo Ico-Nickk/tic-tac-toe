@@ -98,23 +98,28 @@ const gameBoard = (()=>{
     };
 
     const winCondition = () => {
+        console.log("wincondition is running")
         Object.values(gameGrid).forEach(value => {
             switch (value) {
-                case "xxx":
+                case "XXX":
                     if (player1.getSymbol() === value[0]) {
-                        console.log(`winner ${player1.name}`);
+                        console.log(`winner ${player1.getName()}`);
                         player1.addScore();
+                        gamesPlayed++;
                     } else {
-                        console.log(`winner ${player2.name}`);
+                        console.log(`winner ${player2.getName()}`);
                         player2.addScore;};
+                        gamesPlayed++;
                     break;
-                case "ooo":
+                case "OOO":
                     if (player1.getSymbol() === value[0]) {
-                        console.log(`winner ${player1.name}`);
+                        console.log(`winner ${player1.getName()}`);
                         player1.addScore();
+                        gamesPlayed++;
                     } else { 
-                        console.log(`winner ${player2.name}`);
+                        console.log(`winner ${player2.getName()}`);
                         player2.addScore();};
+                        gamesPlayed++;
                     break;
                 default:
                     break;
