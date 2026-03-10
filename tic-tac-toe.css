@@ -88,6 +88,10 @@ body {
     cursor: pointer;
 }
 
+.disabled {
+    background-color: lightgray;
+}
+
 .reset-start-btns {
     display: flex;
     flex-direction: column;
