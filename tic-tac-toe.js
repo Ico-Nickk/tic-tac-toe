@@ -174,3 +174,44 @@ headerSection.addEventListener("submit", function(event){
     };
 
 });
+
+headerSection.addEventListener("click", (event) => {
+    const player1Xbtn = document.querySelector(".player1X");
+    const player1Obtn = document.querySelector(".player1O");
+    const player2Xbtn = document.querySelector(".player2X");
+    const player2Obtn = document.querySelector(".player2O");
+    if(event.target && event.target.matches(".player1X.selectBtn")) {
+        console.log("player1X");
+        player1.setSymbol("X");
+        player1Xbtn.classList.toggle("disabled");
+        if (player1Obtn.classList.contains("disabled") != true) {
+            player1Obtn.classList.add("disabled");
+        }
+        
+    };
+    if(event.target && event.target.matches(".player1O.selectBtn")) {
+        console.log("player1O");
+        player1.setSymbol("O");
+        player1Obtn.classList.toggle("disabled")
+        if (player1Xbtn.classList.contains("disabled") != true) {
+            player1Xbtn.classList.add("disabled");
+        }
+    };
+    if(event.target && event.target.matches(".player2X.selectBtn")) {
+        console.log("player2X");
+        player2.setSymbol("X");
+        player2Xbtn.classList.toggle("disabled");
+        if (player2Obtn.classList.contains("disabled") != true) {
+            player2Obtn.classList.add("disabled");
+        }
+        
+    };
+    if(event.target && event.target.matches(".player2O.selectBtn")) {
+        console.log("player2O");
+        player2.setSymbol("O");
+        player2Obtn.classList.toggle("disabled")
+        if (player2Xbtn.classList.contains("disabled") != true) {
+            player2Xbtn.classList.add("disabled");
+        }
+    };
+})
