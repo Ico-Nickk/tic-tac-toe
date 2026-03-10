@@ -130,11 +130,9 @@ const gameBoard = (()=>{
     
     let gamesPlayed = 0;
     const getGamesPlayed = () => gamesPlayed;
+
     function gameOver(){
-        if (getTurnsPlayed() === 7) {
-            winCondition();
-            gamesPlayed++
-        };
+        winCondition();
     };
 
     let currentPlayer;
