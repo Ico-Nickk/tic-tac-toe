@@ -131,8 +131,39 @@ const gameBoard = (()=>{
             gamesPlayed++
         };
     };
+
+    let currentPlayer;
+    let players = [player1, player2];
+
+    const firstMove = () => {
+        const randomNum = Math.floor(Math.random() * 2);
+        let player = players[randomNum];
+        if (randomNum === 1) {
+            isplayerOneTurn = true;
+            currentPlayer = player
+        } else {
+            isplayerOneTurn = false;
+            currentPlayer = players[0]
+        }
+        console.log(player.getName());
+        console.log(randomNum);
+    };
+
+    let isplayerOneTurn;
+    const getCurrentPlayer = () => currentPlayer
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, getGamesPlayed};
+    const switchTurns = () => {
+        if (isplayerOneTurn) {
+            console.log(player1.getName());
+            currentPlayer = player1;
+        } else {
+            console.log(player2.getName());
+            currentPlayer = player2;
+        };
+        isplayerOneTurn = !isplayerOneTurn;
+    };
+    
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, getGamesPlayed, switchTurns, firstMove, getCurrentPlayer};
 })();
 
 
@@ -213,5 +244,40 @@ headerSection.addEventListener("click", (event) => {
         if (player2Xbtn.classList.contains("disabled") != true) {
             player2Xbtn.classList.add("disabled");
         }
+    };
+});
+
+const gameBoardDisplay = document.querySelector(".game-board");
+gameBoardDisplay.addEventListener("click", (event)=> {
+    switch (event.target.id) {
+        case "a1":
+            console.log("a1 pressed")
+
+            break;
+        case "b1":
+            console.log("b1 pressed")
+            break;
+        case "c1":
+
+            break;
+        case "a2":
+
+            break;
+        case "b2":
+
+            break;
+        case "c2":
+
+            break;
+        case "a3":
+
+            break;
+        case "b3":
+
+            break;
+        case "c3":
+
+            break;
+        default:
     };
 })
