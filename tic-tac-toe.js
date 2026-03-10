@@ -157,10 +157,10 @@ const gameBoard = (()=>{
     
     const switchTurns = () => {
         if (isplayerOneTurn) {
-            console.log(player1.getName());
+            console.log(`${player1.getName()} turn`);
             currentPlayer = player1;
         } else {
-            console.log(player2.getName());
+            console.log(`${player2.getName()} turn`);
             currentPlayer = player2;
         };
         isplayerOneTurn = !isplayerOneTurn;
