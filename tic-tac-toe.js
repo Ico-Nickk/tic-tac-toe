@@ -95,6 +95,7 @@ const gameBoard = (()=>{
         increaseTurnsPlayed();
         gridSquares[square] = player.getSymbol();
         gameOver();
+        console.log("symbol added");
     };
 
     const winCondition = () => {
