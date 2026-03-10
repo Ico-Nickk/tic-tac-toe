@@ -255,33 +255,77 @@ const gameBoardDisplay = document.querySelector(".game-board");
 gameBoardDisplay.addEventListener("click", (event)=> {
     switch (event.target.id) {
         case "a1":
-            console.log("a1 pressed")
-
+            console.log("a1 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+
         case "b1":
-            console.log("b1 pressed")
+            console.log("b1 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
+
             break;
         case "c1":
-
+            console.log("c1 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+            
         case "a2":
-
+            console.log("a2 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+
         case "b2":
-
+            console.log("b2 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+            
         case "c2":
-
+            console.log("c2 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+            
         case "a3":
-
+            console.log("a3 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+            
         case "b3":
-
+            console.log("b3 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+            
         case "c3":
-
+            console.log("c3 pressed");
+            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
+            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            console.log(gameBoard.getCurrentPlayer().getSymbol());
+            gameBoard.switchTurns();
             break;
+
         default:
     };
 })
