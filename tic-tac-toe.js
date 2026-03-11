@@ -108,6 +108,10 @@ const gameBoard = (()=>{
         gameStatus.textContent = `round ${getRoundsPlayed()}`;
     }
 
+    function changeStartBttn() {
+        gameStart.textContent = "Next round"
+    }
+
     const winCondition = () => {
         console.log("wincondition is running")
         Object.values(gameGrid).forEach(value => {
@@ -118,11 +122,13 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
+                        changeStartBttn()
                     } else {
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore;};
                         roundsPlayed++;
+                        changeStartBttn()
                     break;
                 case "OOO":
                     if (player1.getSymbol() === value[0]) {
@@ -130,11 +136,13 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
+                        changeStartBttn()
                     } else { 
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore();};
                         roundsPlayed++;
+                        changeStartBttn()
                     break;
                 default:
                     break;
