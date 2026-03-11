@@ -98,6 +98,11 @@ const gameBoard = (()=>{
         console.log("symbol added");
     };
 
+    function updateWinner(value) {
+        const winner = document.querySelector(".winner");
+        winner.textContent = winner.textContent + " " + value;
+    }
+
     const winCondition = () => {
         console.log("wincondition is running")
         Object.values(gameGrid).forEach(value => {
@@ -105,20 +110,24 @@ const gameBoard = (()=>{
                 case "XXX":
                     if (player1.getSymbol() === value[0]) {
                         console.log(`winner ${player1.getName()}`);
+                        updateWinner(player1.getName());
                         player1.addScore();
                         gamesPlayed++;
                     } else {
                         console.log(`winner ${player2.getName()}`);
+                        updateWinner(player2.getName());
                         player2.addScore;};
                         gamesPlayed++;
                     break;
                 case "OOO":
                     if (player1.getSymbol() === value[0]) {
                         console.log(`winner ${player1.getName()}`);
+                        updateWinner(player1.getName());
                         player1.addScore();
                         gamesPlayed++;
                     } else { 
                         console.log(`winner ${player2.getName()}`);
+                        updateWinner(player2.getName());
                         player2.addScore();};
                         gamesPlayed++;
                     break;
