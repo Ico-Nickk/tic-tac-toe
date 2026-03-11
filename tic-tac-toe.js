@@ -107,10 +107,22 @@ const gameBoard = (()=>{
         const gameStatus = document.querySelector(".status-value");
         gameStatus.textContent = `round ${getRoundsPlayed()}`;
     }
+    
+    function resetWinner() {
+        const winner = document.querySelector(".winner");
+        winner.textContent = "winner :";
+    }
 
     function changeStartBttn() {
         gameStart.textContent = "Next round"
     }
+
+    function resetBoard() {
+        const gameBoardCells = document.querySelectorAll(".cell");
+        for(let cell of gameBoardCells) {
+            cell.textContent = " ";
+        };
+    };
 
     const winCondition = () => {
         console.log("wincondition is running")
