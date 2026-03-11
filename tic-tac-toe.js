@@ -94,13 +94,13 @@ const gameBoard = (()=>{
     const addSymbol = (square, player) => {
         increaseTurnsPlayed();
         gridSquares[square] = player.getSymbol();
-        gameOver();
+        roundOver();
         console.log("symbol added");
     };
 
     function updateWinner(value) {
         const winner = document.querySelector(".winner");
-        winner.textContent = winner.textContent + " " + value;
+        winner.textContent = ` winner : ${value}`;
     }
 
     function updateGameLog() {
