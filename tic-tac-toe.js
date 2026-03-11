@@ -186,11 +186,13 @@ const gameBoard = (()=>{
             currentPlayer = player;
             updateStatus();
             updateGameLog();
+            resetWinner()
         } else {
             isplayerOneTurn = false;
             currentPlayer = players[0];
             updateStatus();
             updateGameLog();
+            resetWinner();
         }
         console.log(player.getName());
         console.log(randomNum);
@@ -305,6 +307,7 @@ headerSection.addEventListener("click", (event) => {
 const gameStart = document.querySelector(".startBtn");
 gameStart.addEventListener("click", (event) => {
     gameBoard.firstMove();
+    gameBoard.resetBoard();
 })
 
 const gameBoardDisplay = document.querySelector(".game-board");
