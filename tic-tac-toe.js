@@ -166,7 +166,7 @@ const gameBoard = (()=>{
     let roundsPlayed = 1;
     const getRoundsPlayed = () => roundsPlayed;
 
-    function gameOver(){
+    function roundOver(){
         winCondition();
     };
 
@@ -214,7 +214,7 @@ const gameBoard = (()=>{
     };
     
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, switchTurns, firstMove, getCurrentPlayer};
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner};
 })();
 
 
