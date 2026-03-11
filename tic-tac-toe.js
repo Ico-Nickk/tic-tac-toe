@@ -103,6 +103,11 @@ const gameBoard = (()=>{
         winner.textContent = winner.textContent + " " + value;
     }
 
+    function updateGameLog() {
+        const gameStatus = document.querySelector(".status-value");
+        gameStatus.textContent = `round ${getRoundsPlayed()}`;
+    }
+
     const winCondition = () => {
         console.log("wincondition is running")
         Object.values(gameGrid).forEach(value => {
@@ -112,24 +117,24 @@ const gameBoard = (()=>{
                         console.log(`winner ${player1.getName()}`);
                         updateWinner(player1.getName());
                         player1.addScore();
-                        gamesPlayed++;
+                        roundsPlayed++;
                     } else {
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore;};
-                        gamesPlayed++;
+                        roundsPlayed++;
                     break;
                 case "OOO":
                     if (player1.getSymbol() === value[0]) {
                         console.log(`winner ${player1.getName()}`);
                         updateWinner(player1.getName());
                         player1.addScore();
-                        gamesPlayed++;
+                        roundsPlayed++;
                     } else { 
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore();};
-                        gamesPlayed++;
+                        roundsPlayed++;
                     break;
                 default:
                     break;
@@ -138,8 +143,8 @@ const gameBoard = (()=>{
         })
     };
     
-    let gamesPlayed = 0;
-    const getGamesPlayed = () => gamesPlayed;
+    let roundsPlayed = 1;
+    const getRoundsPlayed = () => roundsPlayed;
 
     function gameOver(){
         winCondition();
@@ -156,10 +161,12 @@ const gameBoard = (()=>{
             isplayerOneTurn = true;
             currentPlayer = player;
             updateStatus();
+            updateGameLog();
         } else {
             isplayerOneTurn = false;
             currentPlayer = players[0];
             updateStatus();
+            updateGameLog();
         }
         console.log(player.getName());
         console.log(randomNum);
@@ -187,7 +194,7 @@ const gameBoard = (()=>{
     };
     
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, getGamesPlayed, switchTurns, firstMove, getCurrentPlayer};
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, switchTurns, firstMove, getCurrentPlayer};
 })();
 
 
