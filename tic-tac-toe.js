@@ -157,6 +157,10 @@ const gameBoard = (()=>{
                         changeStartBttn()
                     break;
                 default:
+                    if(getTurnsPlayed() === 8) {
+                        updateWinner("its a Tie!");
+                        changeStartBttn()
+                    };
                     break;
             };
 
