@@ -138,34 +138,45 @@ const gameBoard = (()=>{
 
     let currentPlayer;
     let players = [player1, player2];
+    const getCurrentPlayer = () => currentPlayer
 
     const firstMove = () => {
         const randomNum = Math.floor(Math.random() * 2);
         let player = players[randomNum];
         if (randomNum === 1) {
             isplayerOneTurn = true;
-            currentPlayer = player
+            currentPlayer = player;
+            updateStatus();
         } else {
             isplayerOneTurn = false;
-            currentPlayer = players[0]
+            currentPlayer = players[0];
+            updateStatus();
         }
         console.log(player.getName());
         console.log(randomNum);
     };
-
+    
     let isplayerOneTurn;
-    const getCurrentPlayer = () => currentPlayer
     
     const switchTurns = () => {
         if (isplayerOneTurn) {
             console.log(`${player1.getName()} turn`);
             currentPlayer = player1;
+            updateStatus();
         } else {
             console.log(`${player2.getName()} turn`);
             currentPlayer = player2;
+            updateStatus();
         };
         isplayerOneTurn = !isplayerOneTurn;
     };
+    function updateStatus() {
+        const currentPlayersTurn = document.querySelector(".currentPlayersTurn");
+        const currentPlayersSymbol = document.querySelector(".playerSymbol");
+        currentPlayersSymbol.textContent = gameBoard.getCurrentPlayer().getSymbol();
+        currentPlayersTurn.textContent = gameBoard.getCurrentPlayer().getName();
+    };
+    
     
     return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, gameOver, getGamesPlayed, switchTurns, firstMove, getCurrentPlayer};
 })();
@@ -207,7 +218,7 @@ headerSection.addEventListener("submit", function(event){
         player2.setPlayerName(inputVal)
         createPlayerTag(inputVal, form, 2);
     };
-
+    
 });
 
 headerSection.addEventListener("click", (event) => {
