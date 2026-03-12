@@ -134,13 +134,15 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
-                        changeStartBttn()
+                        changeStartBttn();
+                        checkGameOver();
                     } else {
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore;};
                         roundsPlayed++;
-                        changeStartBttn()
+                        changeStartBttn();
+                        checkGameOver();
                     break;
                 case "OOO":
                     if (player1.getSymbol() === value[0]) {
@@ -148,13 +150,15 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
-                        changeStartBttn()
+                        changeStartBttn();
+                        checkGameOver();
                     } else { 
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore();};
                         roundsPlayed++;
-                        changeStartBttn()
+                        changeStartBttn();
+                        checkGameOver();
                     break;
                 default:
                     if(getTurnsPlayed() === 8) {
@@ -169,6 +173,15 @@ const gameBoard = (()=>{
     
     let roundsPlayed = 1;
     const getRoundsPlayed = () => roundsPlayed;
+
+    function checkGameOver() {
+        if (getRoundsPlayed() === 3){
+            if (player1.getScore() > player2.getScore())
+            alert(`game over! winner ${player1.getName()} score is ${player1.getScore()} to ${player2.getScore()}`);
+        } else {
+            alert(`game over! winner ${player2.getName()} score is ${player2.getScore()} to ${player1.getScore()}`);
+        }
+    }
 
     function roundOver(){
         winCondition();
@@ -220,7 +233,7 @@ const gameBoard = (()=>{
     };
     
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner};
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner, getRoundsPlayed};
 })();
 
 
