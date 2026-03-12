@@ -87,9 +87,7 @@ const gameBoard = (()=>{
     };
 
     let turnsPlayed = 0;
-
     const getTurnsPlayed = () => turnsPlayed;
-
     const increaseTurnsPlayed = () => turnsPlayed++;
 
     const getGridSquareVal = (square) => gridSquares[square];
@@ -105,6 +103,10 @@ const gameBoard = (()=>{
         console.log("symbol added");
     };
 
+    function roundOver(){
+        winCondition();
+    };
+    
     function updateWinner(value) {
         const winner = document.querySelector(".winner");
         winner.textContent = ` winner : ${value}`;
@@ -131,6 +133,9 @@ const gameBoard = (()=>{
         };
     };
 
+    let roundsPlayed = 0;
+    const getRoundsPlayed = () => roundsPlayed;
+    
     const winCondition = () => {
         console.log("wincondition is running")
         Object.values(gameGrid).forEach(value => {
@@ -178,9 +183,6 @@ const gameBoard = (()=>{
         })
     };
     
-    let roundsPlayed = 0;
-    const getRoundsPlayed = () => roundsPlayed;
-
     function checkGameOver() {
         if (getRoundsPlayed() === 3){
             if (player1.getScore() > player2.getScore())
@@ -189,10 +191,6 @@ const gameBoard = (()=>{
             alert(`game over! winner ${player2.getName()} score is ${player2.getScore()} to ${player1.getScore()}`);
         }
     }
-
-    function roundOver(){
-        winCondition();
-    };
 
     let currentPlayer;
     let players = [player1, player2];
@@ -218,9 +216,8 @@ const gameBoard = (()=>{
         console.log(randomNum);
     };
     
-    let isplayerOneTurn;
-    
     const switchTurns = () => {
+        let isplayerOneTurn;
         if (isplayerOneTurn) {
             console.log(`${player1.getName()} turn`);
             currentPlayer = player1;
@@ -232,6 +229,7 @@ const gameBoard = (()=>{
         };
         isplayerOneTurn = !isplayerOneTurn;
     };
+
     function updateStatus() {
         const currentPlayersTurn = document.querySelector(".currentPlayersTurn");
         const currentPlayersSymbol = document.querySelector(".playerSymbol");
@@ -240,7 +238,7 @@ const gameBoard = (()=>{
     };
     
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner, getRoundsPlayed, resetGridSquares};
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner, getRoundsPlayed, resetGridSquares, updateGameLog, updateStatus};
 })();
 
 
@@ -329,6 +327,9 @@ gameStart.addEventListener("click", (event) => {
     gameBoard.firstMove();
     gameBoard.resetBoard();
     gameBoard.resetGridSquares();
+    gameBoard.updateStatus();
+    gameBoard.updateGameLog();
+    gameBoard.resetWinner()
 })
 
 const gameBoardDisplay = document.querySelector(".game-board");
