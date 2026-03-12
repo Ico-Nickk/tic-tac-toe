@@ -105,6 +105,7 @@ const gameBoard = (()=>{
 
     function roundOver(){
         winCondition();
+        changeStartBttn();
     };
     
     function updateWinner(value) {
@@ -146,14 +147,12 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
-                        changeStartBttn();
                         checkGameOver();
                     } else {
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore;};
                         roundsPlayed++;
-                        changeStartBttn();
                         checkGameOver();
                     break;
                 case "OOO":
@@ -162,20 +161,17 @@ const gameBoard = (()=>{
                         updateWinner(player1.getName());
                         player1.addScore();
                         roundsPlayed++;
-                        changeStartBttn();
                         checkGameOver();
                     } else { 
                         console.log(`winner ${player2.getName()}`);
                         updateWinner(player2.getName());
                         player2.addScore();};
                         roundsPlayed++;
-                        changeStartBttn();
                         checkGameOver();
                     break;
                 default:
                     if(getTurnsPlayed() === 8) {
                         updateWinner("its a Tie!");
-                        changeStartBttn()
                     };
                     break;
             };
@@ -216,8 +212,8 @@ const gameBoard = (()=>{
         console.log(randomNum);
     };
     
+    let isplayerOneTurn;
     const switchTurns = () => {
-        let isplayerOneTurn;
         if (isplayerOneTurn) {
             console.log(`${player1.getName()} turn`);
             currentPlayer = player1;
