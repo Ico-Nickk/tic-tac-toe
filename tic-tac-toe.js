@@ -80,9 +80,16 @@ const gameBoard = (()=>{
 
     };
 
+    function resetGridSquares() {
+        for (const [key, value] of Object.entries(gridSquares)) {
+            gridSquares[key] = "";
+        };
+    };
+
     let turnsPlayed = 0;
 
     const getTurnsPlayed = () => turnsPlayed;
+
     const increaseTurnsPlayed = () => turnsPlayed++;
 
     const getGridSquareVal = (square) => gridSquares[square];
@@ -171,7 +178,7 @@ const gameBoard = (()=>{
         })
     };
     
-    let roundsPlayed = 1;
+    let roundsPlayed = 0;
     const getRoundsPlayed = () => roundsPlayed;
 
     function checkGameOver() {
@@ -233,7 +240,7 @@ const gameBoard = (()=>{
     };
     
     
-    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner, getRoundsPlayed};
+    return {addSymbol, getGridSquareVal, getBoardSection, showGridSquare, getTurnsPlayed, winCondition, roundOver, switchTurns, firstMove, getCurrentPlayer, resetBoard, resetWinner, getRoundsPlayed, resetGridSquares};
 })();
 
 
@@ -321,6 +328,7 @@ const gameStart = document.querySelector(".startBtn");
 gameStart.addEventListener("click", (event) => {
     gameBoard.firstMove();
     gameBoard.resetBoard();
+    gameBoard.resetGridSquares();
 })
 
 const gameBoardDisplay = document.querySelector(".game-board");
@@ -329,7 +337,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "a1":
             console.log("a1 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -337,7 +345,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "b1":
             console.log("b1 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
 
@@ -345,7 +353,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "c1":
             console.log("c1 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -353,7 +361,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "a2":
             console.log("a2 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -361,7 +369,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "b2":
             console.log("b2 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -369,7 +377,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "c2":
             console.log("c2 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -377,7 +385,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "a3":
             console.log("a3 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -385,7 +393,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "b3":
             console.log("b3 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
@@ -393,7 +401,7 @@ gameBoardDisplay.addEventListener("click", (event)=> {
         case "c3":
             console.log("c3 pressed");
             gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getCurrentPlayer().getSymbol();
+            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
             console.log(gameBoard.getCurrentPlayer().getSymbol());
             gameBoard.switchTurns();
             break;
