@@ -72,7 +72,7 @@
             </section>
 
             <!-- View 2: Game -->
-            <section id="game-view" class="view active">
+            <section id="game-view" class="view">
                 <div class="game-header">
                     <div class="player-banner active" id="banner-p1">
                         <div class="player-info">
@@ -135,31 +135,31 @@
             </section>
 
             <!-- View 3: Round Result -->
-            <section id="round-result-view" class="view">
+            <section id="round-result-view" class="view active">
                 <div class="card result-card">
                     <div class="trophy-icon">
                         <span class="material-symbols-outlined"
                             style="font-variation-settings: 'FILL' 1">emoji_events</span>
                     </div>
-                    <div class="player-label" style="margin-bottom: 1rem">Round 1 Complete</div>
-                    <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 2rem;">
+                    <div class="player-label currentRound" style="margin-bottom: 1rem">Round 1 Complete</div>
+                    <h1 class="winnerBanner" style="font-size: 3rem; font-weight: 900; margin-bottom: 2rem;">
                         Alex Kinetic <span style="color: var(--primary)">Wins!</span>
                     </h1>
 
                     <div class="bento-grid">
-                        <div class="bento-item" style="background: var(--surface-container-highest)">
+                        <div class="bento-item player1" style="background: var(--surface-container-highest)">
                             <div style="text-align: left">
                                 <div class="player-label" style="color: var(--primary)">Player X</div>
                                 <div class="player-name">Alex Kinetic</div>
                             </div>
                             <div class="score-num">1</div>
                         </div>
-                        <div class="bento-item">
+                        <div class="bento-item player2">
                             <div style="text-align: left">
                                 <div class="player-label" style="color: var(--secondary)">Player O</div>
                                 <div class="player-name">Sam Spectra</div>
                             </div>
-                            <div class="score-num" style="opacity: 0.3">0</div>
+                            <div class="score-num player2" style="opacity: 0.3">0</div>
                         </div>
                     </div>
 
