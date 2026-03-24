@@ -81,9 +81,8 @@ const gameBoard = (()=>{
         };
     };
 
-    const addSymbol = (square, marker) => {
-        gridSquares[square] = marker;
-        console.log(`${marker} added to square ${square}`);
+    const addSymbol = (square, player) => {
+        gridSquares[square] = player.marker;
     };
 
     const getGridSquareVal = (square) => gridSquares[square];
@@ -94,9 +93,10 @@ const gameBoard = (()=>{
 })();
 
 const gameController = {
-    rounds: 1,
+    rounds: 0,
     roundWinner: "",
     gameWinner: "",
+    isRoundWinner: "",
     isPlayerOneTurn: false,
     currentPlayersTurn: player1,
 
@@ -105,16 +105,26 @@ const gameController = {
             switch (value) {
                 case "XXX":
                     this.roundWinner = player1;
+                    this.updateWinnerScore();
                     console.log("winner is player1");
-                    break;
+                    this.isRoundWinner = true
+                    break
                 case "OOO":
                     this.roundWinner = player2;
                     console.log("winner is player2");
-                    break;
+                    this.updateWinnerScore();
+                    this.isRoundWinner = true;
+                    break
                 default:
             };
 
         });
+    },
+
+    increaseRounds: function(){
+        if(this.rounds < 3) {
+            this.rounds++;
+        };
     },
 
     updateWinnerScore: function(){
@@ -123,7 +133,7 @@ const gameController = {
         } else {
             console.log("no round winner found");
         };
-        this.rounds++;
+        this.increaseRounds;
     },
 
     checkGameWinner: function(){
@@ -162,11 +172,20 @@ const gameController = {
             console.log(`first to play is ${this.currentPlayersTurn.tag}`);
         };
     },
+    
+    endOfRound: function() {
+        if(this.isRoundWinner && this.rounds === 3) {
+            this.checkGameWinner();
+            console.log(`${this.gameWinner.name}`);
+        }
+    },
 
     playATurn: function(event){
         gameBoard.addSymbol(event.id, gameController.currentPlayersTurn);
         displayController.placeMarker(event, gameController.currentPlayersTurn);
-        gameController.changeTurns();
+        this.checkRoundWinner();
+        this.endOfRound();
+        this.changeTurns();
         displayController.updateCurrentPlayersTurn();
         event.disabled = true;
     }
@@ -211,50 +230,6 @@ const gameGrid = {
     b3: document.querySelector("#b3"),
     c3: document.querySelector("#c3"),
 }
-
-
-
-/*gameBoard.addSymbol("a1", player1.symbol);
-gameBoard.addSymbol("b1", player1.symbol);
-gameBoard.addSymbol("a2", player2.symbol);
-gameBoard.addSymbol("a3", player1.symbol);
-gameBoard.addSymbol("b2", player2.symbol);
-gameBoard.addSymbol("c2", player2.symbol);
-gameController.checkRoundWinner();
-gameController.updateWinnerScore();
-
-gameBoard.resetGridSquares();
-
-gameController.checkFirstToPlay();
-gameBoard.addSymbol("a1", player1.symbol);
-gameBoard.addSymbol("b1", player1.symbol);
-gameBoard.addSymbol("a2", player2.symbol);
-gameBoard.addSymbol("a3", player1.symbol);
-gameBoard.addSymbol("b2", player2.symbol);
-gameBoard.addSymbol("c2", player2.symbol);
-gameController.checkRoundWinner();
-gameController.updateWinnerScore();
-
-gameBoard.resetGridSquares();
-
-gameController.checkFirstToPlay();
-gameBoard.addSymbol("a1", player1.symbol);
-gameBoard.addSymbol("b1", player1.symbol);
-gameBoard.addSymbol("a2", player2.symbol);
-gameBoard.addSymbol("a3", player1.symbol);
-gameBoard.addSymbol("b2", player2.symbol);
-gameBoard.addSymbol("c2", player2.symbol);
-gameController.checkRoundWinner();
-gameController.updateWinnerScore();
-gameController.checkGameWinner(); */
-
-const gameStart = document.querySelector(".startBtn");
-/*gameStart.addEventListener("click", (event) => {
-    gameBoard.firstMove();
-    gameBoard.updateStatus();
-    gameBoard.updateGameLog();
-    gameBoard.resetWinner()
-})*/
 
 const gameGridDisplay = document.querySelector(".game-grid");
 gameGridDisplay.addEventListener("click", (event)=> {
