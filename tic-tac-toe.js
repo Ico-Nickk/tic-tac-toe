@@ -1,6 +1,6 @@
 const player1 = (()=> {
     let tag = "player1";
-    let name;
+    let name = "nick";
     let symbol = "X";
     let currentScore = 0;
     const setPlayerName = (val)=> {
@@ -14,7 +14,7 @@ const player1 = (()=> {
 
 const player2 = (()=> {
     let tag = "player2";
-    let name;
+    let name = "judy";
     let symbol = "O";
     let currentScore = 0;
     const setPlayerName = (val)=> {
@@ -85,6 +85,7 @@ const gameBoard = (()=>{
         gridSquares[square] = marker;
         console.log(`${marker} added to square ${square}`);
         gameController.changeTurns();
+        displayController.updateCurrentPlayersTurn();
     };
 
     const getGridSquareVal = (square) => gridSquares[square];
@@ -95,11 +96,11 @@ const gameBoard = (()=>{
 })();
 
 const gameController = {
-    rounds: 0,
+    rounds: 1,
     roundWinner: "",
     gameWinner: "",
     isPlayerOneTurn: false,
-    currentPlayersTurn: "",
+    currentPlayersTurn: player1,
 
     checkRoundWinner: function(){
         Object.values(gameBoard.gameGrid).forEach(value => {
@@ -142,9 +143,13 @@ const gameController = {
     changeTurns: function(){
         if(this.isPlayerOneTurn) {
             this.currentPlayersTurn = player1;
+            displayController.toggleBanner(displayController.bannerP1);
+            displayController.toggleBanner(displayController.bannerP2);
             console.log(`${this.currentPlayersTurn.tag} turn`);
         } else {
-            this.currentPlayersTurn = player2;
+            this.currentPlayersTurn = player2
+            displayController.toggleBanner(displayController.bannerP2);
+            displayController.toggleBanner(displayController.bannerP1);
             console.log(`${this.currentPlayersTurn.tag} turn`);
         }
         this.isPlayerOneTurn = !this.isPlayerOneTurn;
@@ -161,7 +166,44 @@ const gameController = {
     }
 };
 
-gameBoard.addSymbol("a1", player1.symbol);
+const displayController = {
+    bannerP1: document.getElementById("banner-p1"),
+    bannerP2: document.getElementById("banner-p2"),
+    roundCounter: document.querySelector(".roundCounter"),
+    currentPlayersTurn: document.querySelector(".currentTurn"),
+    toggleBanner: function(banner) {
+        if(banner.classList.contains("active")){
+            banner.classList.replace("active", "inactive");
+        } else {
+            banner.classList.replace("inactive", "active");
+        };
+    },
+
+    updateCurrentPlayersTurn: function(){
+        this.currentPlayersTurn.textContent = `${gameController.currentPlayersTurn.name} Turn!`;
+    },
+
+    updateRoundCounter: function(){
+        this.roundCounter.textContent = `Round ${gameController.rounds}`;
+    }
+
+}
+
+const gameGrid = {
+    a1: document.querySelector("#a1"),
+    b1: document.querySelector("#b1"),
+    c1: document.querySelector("#c1"),
+    a2: document.querySelector("#a2"),
+    b2: document.querySelector("#b2"),
+    c2: document.querySelector("#c2"),
+    a3: document.querySelector("#a3"),
+    b3: document.querySelector("#b3"),
+    c3: document.querySelector("#c3"),
+}
+
+
+
+/*gameBoard.addSymbol("a1", player1.symbol);
 gameBoard.addSymbol("b1", player1.symbol);
 gameBoard.addSymbol("a2", player2.symbol);
 gameBoard.addSymbol("a3", player1.symbol);
@@ -171,7 +213,6 @@ gameController.checkRoundWinner();
 gameController.updateWinnerScore();
 
 gameBoard.resetGridSquares();
-
 
 gameController.checkFirstToPlay();
 gameBoard.addSymbol("a1", player1.symbol);
@@ -194,7 +235,7 @@ gameBoard.addSymbol("b2", player2.symbol);
 gameBoard.addSymbol("c2", player2.symbol);
 gameController.checkRoundWinner();
 gameController.updateWinnerScore();
-gameController.checkGameWinner();
+gameController.checkGameWinner(); */
 
 const gameStart = document.querySelector(".startBtn");
 /*gameStart.addEventListener("click", (event) => {
@@ -204,79 +245,44 @@ const gameStart = document.querySelector(".startBtn");
     gameBoard.resetWinner()
 })*/
 
-const gameBoardDisplay = document.querySelector(".game-board");
-gameBoardDisplay.addEventListener("click", (event)=> {
+const gameGridDisplay = document.querySelector(".game-grid");
+gameGridDisplay.addEventListener("click", (event)=> {
     switch (event.target.id) {
         case "a1":
             console.log("a1 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
+            gameBoard.addSymbol(event.target.id, gameController.currentPlayersTurn)
+            displayController.updateCurrentPlayersTurn();
             break;
 
         case "b1":
             console.log("b1 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
-
             break;
         case "c1":
             console.log("c1 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
             
         case "a2":
             console.log("a2 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
 
         case "b2":
             console.log("b2 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
             
         case "c2":
             console.log("c2 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
             
         case "a3":
             console.log("a3 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
             
         case "b3":
             console.log("b3 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
             
         case "c3":
             console.log("c3 pressed");
-            gameBoard.addSymbol(event.target.id, gameBoard.getCurrentPlayer());
-            event.target.textContent = gameBoard.getGridSquareVal(`${event.target.id}`);
-            console.log(gameBoard.getCurrentPlayer().getSymbol());
-            gameBoard.switchTurns();
             break;
 
         default:
