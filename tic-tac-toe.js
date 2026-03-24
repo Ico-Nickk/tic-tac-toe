@@ -301,3 +301,32 @@ gameGridDisplay.addEventListener("click", (event)=> {
         default:
     };
 });
+
+const roundResultController = {
+    winnerBanner: document.querySelector(".winnerBanner"),
+
+    endOfCurrentRound: document.querySelector(".currentRound"),
+
+    player1Name: document.querySelector(".player1 .player-name"),
+
+    player2Name: document.querySelector(".player2 .player-name"),
+
+    player1Score: document.querySelector(".player1 .score-num"),
+
+    player1Score: document.querySelector(".player1 .score-num"),
+
+
+    updateEndOfCurrentRound: function(round){
+        this.endOfCurrentRound.textContent = `Round ${round} complete`;
+    },
+    updateRoundResultBanner: function(winner){
+        this.winnerBanner.childNodes[0].nodeValue = `${winner} `;
+    },
+    updateRoundResultName: function(element, Name){
+        roundResultController[element].textContent = Name;
+    },
+    updateRoundResultScore: function(element, score){
+        roundResultController[element].textContent = score;
+    },
+}
+
