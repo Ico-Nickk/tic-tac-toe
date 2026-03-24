@@ -400,12 +400,12 @@ main {
     transform: scale(1.05);
 }
 
-.cell.x {
+.cell.X {
     color: var(--primary);
     text-shadow: 0 0 20px rgba(8, 70, 237, 0.2);
 }
 
-.cell.o {
+.cell.O {
     color: var(--secondary);
     text-shadow: 0 0 20px rgba(160, 57, 41, 0.2);
 }
