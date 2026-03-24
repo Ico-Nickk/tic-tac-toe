@@ -107,7 +107,7 @@ const gameController = {
                     this.roundWinner = player1;
                     this.updateWinnerScore();
                     console.log("winner is player1");
-                    this.isRoundWinner = true
+                    this.isRoundWinner = true;
                     break
                 case "OOO":
                     this.roundWinner = player2;
@@ -184,10 +184,17 @@ const gameController = {
         gameBoard.addSymbol(event.id, gameController.currentPlayersTurn);
         displayController.placeMarker(event, gameController.currentPlayersTurn);
         this.checkRoundWinner();
+        this.showRoundResults("round");
         this.endOfRound();
         this.changeTurns();
         displayController.updateCurrentPlayersTurn();
         event.disabled = true;
+    },
+
+    showRoundResults: function(nextView){
+        if(this.roundWinner != ""){
+            viewController.showView(nextView);
+        };
     }
 };
 
@@ -217,7 +224,20 @@ const displayController = {
         square.classList.add(player.marker);
     },
 
-}
+};
+
+const viewController = {
+    views: {
+        setup: document.getElementById('setup-view'),
+        game: document.getElementById('game-view'),
+        round: document.getElementById('round-result-view'),
+        final: document.getElementById('final-result-view'),
+    },
+    showView: function(viewName){
+        Object.values(this.views).forEach(v => v.classList.remove('active'));
+        this.views[viewName].classList.add('active');
+    }
+};
 
 const gameGrid = {
     a1: document.querySelector("#a1"),
@@ -229,7 +249,7 @@ const gameGrid = {
     a3: document.querySelector("#a3"),
     b3: document.querySelector("#b3"),
     c3: document.querySelector("#c3"),
-}
+};
 
 const gameGridDisplay = document.querySelector(".game-grid");
 gameGridDisplay.addEventListener("click", (event)=> {
@@ -280,4 +300,4 @@ gameGridDisplay.addEventListener("click", (event)=> {
 
         default:
     };
-})
+});
