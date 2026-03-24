@@ -1,7 +1,7 @@
 const player1 = (()=> {
     let tag = "player1";
     let name = "nick";
-    let symbol = "X";
+    let marker = "X";
     let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
@@ -9,13 +9,13 @@ const player1 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, symbol, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
 })();
 
 const player2 = (()=> {
     let tag = "player2";
     let name = "judy";
-    let symbol = "O";
+    let marker = "O";
     let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
@@ -23,7 +23,7 @@ const player2 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, symbol, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
 })();
 
 const gameBoard = (()=>{
@@ -84,8 +84,6 @@ const gameBoard = (()=>{
     const addSymbol = (square, marker) => {
         gridSquares[square] = marker;
         console.log(`${marker} added to square ${square}`);
-        gameController.changeTurns();
-        displayController.updateCurrentPlayersTurn();
     };
 
     const getGridSquareVal = (square) => gridSquares[square];
@@ -163,6 +161,14 @@ const gameController = {
             this.currentPlayersTurn = player1;
             console.log(`first to play is ${this.currentPlayersTurn.tag}`);
         };
+    },
+
+    playATurn: function(event){
+        gameBoard.addSymbol(event.id, gameController.currentPlayersTurn);
+        displayController.placeMarker(event, gameController.currentPlayersTurn);
+        gameController.changeTurns();
+        displayController.updateCurrentPlayersTurn();
+        event.disabled = true;
     }
 };
 
@@ -185,7 +191,12 @@ const displayController = {
 
     updateRoundCounter: function(){
         this.roundCounter.textContent = `Round ${gameController.rounds}`;
-    }
+    },
+
+    placeMarker: function(square, player){
+        square.textContent = player.marker;
+        square.classList.add(player.marker);
+    },
 
 }
 
@@ -250,39 +261,46 @@ gameGridDisplay.addEventListener("click", (event)=> {
     switch (event.target.id) {
         case "a1":
             console.log("a1 pressed");
-            gameBoard.addSymbol(event.target.id, gameController.currentPlayersTurn)
-            displayController.updateCurrentPlayersTurn();
+            gameController.playATurn(event.target);
             break;
 
         case "b1":
             console.log("b1 pressed");
+            gameController.playATurn(event.target);
             break;
         case "c1":
             console.log("c1 pressed");
+            gameController.playATurn(event.target);
             break;
             
         case "a2":
             console.log("a2 pressed");
+            gameController.playATurn(event.target);
             break;
 
         case "b2":
             console.log("b2 pressed");
+            gameController.playATurn(event.target);
             break;
             
         case "c2":
             console.log("c2 pressed");
+            gameController.playATurn(event.target);
             break;
             
         case "a3":
             console.log("a3 pressed");
+            gameController.playATurn(event.target);
             break;
             
         case "b3":
             console.log("b3 pressed");
+            gameController.playATurn(event.target);
             break;
             
         case "c3":
             console.log("c3 pressed");
+            gameController.playATurn(event.target);
             break;
 
         default:
