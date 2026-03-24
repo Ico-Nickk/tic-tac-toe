@@ -1,36 +1,29 @@
 const player1 = (()=> {
+    let tag = "player1";
     let name;
     let symbol = "X";
+    let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
     };
-    const getName = () => name;
-    let currentScore = 0;
-    let playerSymbol = "";
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    const setSymbol = (Symbol) => {playerSymbol = Symbol;};
-    const getSymbol = () => playerSymbol;
-    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setPlayerName, getName, symbol};
+    return {name, getScore, addScore, resetScore, setPlayerName, symbol, tag};
 })();
 
 const player2 = (()=> {
+    let tag = "player2";
     let name;
     let symbol = "O";
+    let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
     };
-    const getName = () => name;
-    const setName = (val) => {name = val};
-    let currentScore = 0;
-    let playerSymbol = "";
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    const setSymbol = (Symbol) => {playerSymbol = Symbol;};
-    const getSymbol = () => playerSymbol;
-    return {name, getScore, addScore, resetScore, setSymbol, getSymbol, setPlayerName, getName, symbol};
+    return {name, getScore, addScore, resetScore, setPlayerName, symbol, tag};
 })();
 
 const gameBoard = (()=>{
@@ -94,129 +87,9 @@ const gameBoard = (()=>{
         gameController.changeTurns();
     };
 
-    /*let turnsPlayed = 0;
-    const getTurnsPlayed = () => turnsPlayed;
-    const increaseTurnsPlayed = () => turnsPlayed++;*/
-
     const getGridSquareVal = (square) => gridSquares[square];
 
     const getBoardSection = (section) => gameGrid[section];
-
-
-    
-    /*function updateWinner(value) {
-        const winner = document.querySelector(".winner");
-        winner.textContent = ` winner : ${value}`;
-    }
-
-    function updateRounds() {
-        const gameStatus = document.querySelector(".rounds");
-        gameStatus.textContent = `round ${getRoundsPlayed()}`;
-    }
-    
-    function resetWinner() {
-        const winner = document.querySelector(".winner");
-        winner.textContent = "winner :";
-    }
-
-    function changeStartBttn() {
-        gameStart.textContent = "Next round"
-    }
-
-    function resetBoard() {
-        const gameBoardCells = document.querySelectorAll(".cell");
-        for(let cell of gameBoardCells) {
-            cell.textContent = " ";
-        };
-    };
-
-    let roundWinner = "";
-
-    function roundOver() {
-        if (roundWinner != undefined) {
-            roundWinner.addScore();
-            console.log(` winner of this round is ${roundWinner.getName()}`);
-        } else {
-            console.log("round winner not found");
-        }
-    };
-
-    function winCondition(){
-        Object.values(gameGrid).forEach(value => {
-            switch (value) {
-                case "XXX":
-                    if (player1.getSymbol() === value[0]) {
-                        console.log(`winner found ${player1.getName()}`);
-                        player1.addScore();
-                        roundWinner = player1;
-                        return true;
-                    } else {
-                        console.log(`winner found ${player2.getName()}`);
-                        player2.addScore;
-                        roundWinner = player2;
-                        return true;
-                    };
-                case "OOO":
-                    if (player1.getSymbol() === value[0]) {
-                        console.log(`winner found ${player1.getName()}`);
-                        player1.addScore();
-                        roundWinner = player1;
-                        return true;
-                    } else { 
-                        console.log(`winner found${player2.getName()}`);
-                        roundWinner = player2; 
-                        return true;
-                    };
-                default:
-                    if(getTurnsPlayed() === 8) {
-                        console.log("its a Tie!");
-                        return(true);
-                    };
-            };
-
-        });
-    };
-    
-    
-    let players = [player1, player2];
-    let currentPlayer = players[0];
-    const getCurrentPlayer = () => currentPlayer
-
-    const firstMove = () => {
-        const randomNum = Math.floor(Math.random() * 2);
-        let player = players[randomNum];
-        if (randomNum === 1) {
-            isplayerOneTurn = true;
-            currentPlayer = player;
-        } else {
-            isplayerOneTurn = false;
-            currentPlayer = players[0];
-        }
-        console.log(player.getName());
-        console.log(randomNum);
-    };
-    
-    let isplayerOneTurn;
-    const switchTurns = () => {
-        if (isplayerOneTurn) {
-            console.log(`${player1.getName()} turn`);
-            currentPlayer = player1;
-            updateStatus();
-        } else {
-            console.log(`${player2.getName()} turn`);
-            currentPlayer = player2;
-            updateStatus();
-        };
-        isplayerOneTurn = !isplayerOneTurn;
-    };
-
-    function updateStatus() {
-        const currentPlayersTurn = document.querySelector(".currentPlayersTurn");
-        const currentPlayersSymbol = document.querySelector(".playerSymbol");
-        currentPlayersSymbol.textContent = gameBoard.getCurrentPlayer().getSymbol();
-        currentPlayersTurn.textContent = gameBoard.getCurrentPlayer().getName();
-    };*/
-    
     
     return {addSymbol, getGridSquareVal, getBoardSection, gameGrid, resetGridSquares};
 })();
@@ -225,8 +98,8 @@ const gameController = {
     rounds: 0,
     roundWinner: "",
     gameWinner: "",
-    firstToPlay: "player1",
-    isPlayerOneTurn: true,
+    isPlayerOneTurn: false,
+    currentPlayersTurn: "",
 
     checkRoundWinner: function(){
         Object.values(gameBoard.gameGrid).forEach(value => {
@@ -268,25 +141,26 @@ const gameController = {
 
     changeTurns: function(){
         if(this.isPlayerOneTurn) {
-            console.log("player1's turn");
+            this.currentPlayersTurn = player1;
+            console.log(`${this.currentPlayersTurn.tag} turn`);
         } else {
-            console.log("player2's turn");
+            this.currentPlayersTurn = player2;
+            console.log(`${this.currentPlayersTurn.tag} turn`);
         }
         this.isPlayerOneTurn = !this.isPlayerOneTurn;
     },
 
     checkFirstToPlay: function(){
-        if(this.firstToPlay === "player1"){
-            console.log("first to play is player1");
-            this.firstToPlay = "player2";
+        if(this.roundWinner.tag === "player1"){
+            this.currentPlayersTurn = player2;
+            console.log(`first to play is ${this.currentPlayersTurn.tag}`);
         } else {
-            console.log("first to play is player2");
-            this.firstToPlay = "player1";
+            this.currentPlayersTurn = player1;
+            console.log(`first to play is ${this.currentPlayersTurn.tag}`);
         };
     }
 };
 
-gameController.checkFirstToPlay();
 gameBoard.addSymbol("a1", player1.symbol);
 gameBoard.addSymbol("b1", player1.symbol);
 gameBoard.addSymbol("a2", player2.symbol);
@@ -295,6 +169,8 @@ gameBoard.addSymbol("b2", player2.symbol);
 gameBoard.addSymbol("c2", player2.symbol);
 gameController.checkRoundWinner();
 gameController.updateWinnerScore();
+
+gameBoard.resetGridSquares();
 
 
 gameController.checkFirstToPlay();
@@ -306,6 +182,8 @@ gameBoard.addSymbol("b2", player2.symbol);
 gameBoard.addSymbol("c2", player2.symbol);
 gameController.checkRoundWinner();
 gameController.updateWinnerScore();
+
+gameBoard.resetGridSquares();
 
 gameController.checkFirstToPlay();
 gameBoard.addSymbol("a1", player1.symbol);
