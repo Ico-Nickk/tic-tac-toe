@@ -203,7 +203,6 @@ const gameController = {
 
     newRound: function(){
         this.roundWinner = "";
-
     }
 };
 
