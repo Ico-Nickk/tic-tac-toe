@@ -9,7 +9,7 @@ const player1 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, currentScore};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
 })();
 
 const player2 = (()=> {
@@ -23,7 +23,7 @@ const player2 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, currentScore};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
 })();
 
 const gameBoard = (()=>{
@@ -349,8 +349,8 @@ const roundResultController = {
         this.updateRoundResultBanner(gameController.roundWinner.name);
         this.updateRoundResultName("player1Name", player1.name);
         this.updateRoundResultName("player2Name", player2.name);
-        this.updateRoundResultScore("player1Score", player1.currentScore);
-        this.updateRoundResultScore("player2Score", player2.currentScore);
+        this.updateRoundResultScore("player1Score", player1.getScore());
+        this.updateRoundResultScore("player2Score", player2.getScore());
     },
 
     startNewRound: function(){
