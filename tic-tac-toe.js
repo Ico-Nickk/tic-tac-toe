@@ -184,16 +184,16 @@ const gameController = {
         gameBoard.addSymbol(event.id, gameController.currentPlayersTurn);
         displayController.placeMarker(event, gameController.currentPlayersTurn);
         this.checkRoundWinner();
-        this.showRoundResults("round");
+        this.showRoundResults();
         this.endOfRound();
         this.changeTurns();
         displayController.updateCurrentPlayersTurn();
         event.disabled = true;
     },
 
-    showRoundResults: function(nextView){
+    showRoundResults: function(){
         if(this.roundWinner != ""){
-            viewController.showView(nextView);
+            viewController.showView("round");
         };
     }
 };
