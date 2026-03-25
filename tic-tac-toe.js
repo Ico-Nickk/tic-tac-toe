@@ -259,6 +259,7 @@ const gameGrid = {
     resetGameGrid: function() {
         Object.values(this.squares).forEach((square) => {
             square.textContent = "";
+            square.disabled = false;
         });
     },
 
