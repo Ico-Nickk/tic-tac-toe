@@ -196,6 +196,10 @@ const gameController = {
             roundResultController.updateResultView();
             viewController.showView("round");
         };
+    },
+
+    newRound: function(){
+        this.roundWinner = "";
     }
 };
 
@@ -334,16 +338,21 @@ const roundResultController = {
 
     updateResultView: function() {
         this.updateEndOfCurrentRound(gameController.rounds);
-        this.updateRoundResultBanner(gameController.roundWinner);
+        this.updateRoundResultBanner(gameController.roundWinner.name);
         this.updateRoundResultName("player1Name", player1.name);
         this.updateRoundResultName("player2Name", player2.name);
         this.updateRoundResultScore("player1Score", player1.currentScore);
         this.updateRoundResultScore("player2Score", player2.currentScore);
+    },
+
+    startNewRound: function(){
+        gameController.newRound();
+        viewController.showView("game");
     }
 };
 
 const roundStartBtn = document.querySelector("#next-round-btn");
-roundStartBtn.addEventListener("click", () => viewController.showView("game"));
+roundStartBtn.addEventListener("click", () => roundResultController.startNewRound());
 
 /*Final Result view*/
 
