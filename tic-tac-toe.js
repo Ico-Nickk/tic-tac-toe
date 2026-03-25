@@ -93,7 +93,7 @@ const gameBoard = (()=>{
 })();
 
 const gameController = {
-    rounds: 0,
+    rounds: 1,
     roundWinner: "",
     gameWinner: "",
     isRoundWinner: "",
@@ -127,13 +127,16 @@ const gameController = {
         };
     },
 
+    getCurrentRound: function() {
+        return this.rounds;
+    },
+
     updateWinnerScore: function(){
         if (this.roundWinner != "") {
             this.roundWinner.addScore();
         } else {
             console.log("no round winner found");
         };
-        this.increaseRounds;
     },
 
     checkGameWinner: function(){
@@ -173,7 +176,7 @@ const gameController = {
         };
     },
     
-    endOfRound: function() {
+    checkEndOfRound: function() {
         if(this.isRoundWinner && this.rounds === 3) {
             this.checkGameWinner();
             console.log(`${this.gameWinner.name}`);
@@ -185,7 +188,7 @@ const gameController = {
         displayController.placeMarker(event, gameController.currentPlayersTurn);
         this.checkRoundWinner();
         this.showRoundResults();
-        this.endOfRound();
+        this.checkEndOfRound();
         this.changeTurns();
         displayController.updateCurrentPlayersTurn();
         event.disabled = true;
@@ -200,6 +203,7 @@ const gameController = {
 
     newRound: function(){
         this.roundWinner = "";
+
     }
 };
 
@@ -222,8 +226,9 @@ const displayController = {
         this.currentPlayersTurn.textContent = `${gameController.currentPlayersTurn.name} Turn!`;
     },
 
-    updateRoundCounter: function(){
-        this.roundCounter.textContent = `Round ${gameController.rounds}`;
+    updateRoundStatus: function(){
+        console.log("updating the rounds");
+        this.roundCounter.textContent = `Round ${gameController.getCurrentRound()}`;
     },
 
     placeMarker: function(square, player){
@@ -340,11 +345,11 @@ const roundResultController = {
     player2Score: document.querySelector(".player2 .score-num"),
 
 
-    updateEndOfCurrentRound: function(round){
-        this.endOfCurrentRound.textContent = `Round ${round} complete`;
+    updateEndOfCurrentRound: function(){
+        this.endOfCurrentRound.textContent = `Round ${gameController.getCurrentRound()} complete`;
     },
-    updateRoundResultBanner: function(winner){
-        this.winnerBanner.childNodes[0].nodeValue = `${winner} `;
+    updateRoundResultBanner: function(){
+        this.winnerBanner.childNodes[0].nodeValue = `${gameController.roundWinner.name} `;
     },
     updateRoundResultName: function(element, Name){
         roundResultController[element].textContent = Name;
@@ -354,8 +359,8 @@ const roundResultController = {
     },
 
     updateResultView: function() {
-        this.updateEndOfCurrentRound(gameController.rounds);
-        this.updateRoundResultBanner(gameController.roundWinner.name);
+        this.updateEndOfCurrentRound();
+        this.updateRoundResultBanner();
         this.updateRoundResultName("player1Name", player1.name);
         this.updateRoundResultName("player2Name", player2.name);
         this.updateRoundResultScore("player1Score", player1.getScore());
@@ -366,8 +371,10 @@ const roundResultController = {
         gameBoard.resetGridSquares();
         gameGrid.resetGameGrid();
         gameController.newRound();
-        viewController.showView("game");
+        gameController.increaseRounds();
         displayController.updatePlayerScores();
+        displayController.updateRoundStatus(); 
+        viewController.showView("game");
     }
 };
 
