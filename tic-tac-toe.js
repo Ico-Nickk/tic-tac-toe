@@ -9,7 +9,7 @@ const player1 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, currentScore};
 })();
 
 const player2 = (()=> {
@@ -23,7 +23,7 @@ const player2 = (()=> {
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, currentScore};
 })();
 
 const gameBoard = (()=>{
@@ -313,7 +313,7 @@ const roundResultController = {
 
     player1Score: document.querySelector(".player1 .score-num"),
 
-    player1Score: document.querySelector(".player1 .score-num"),
+    player2Score: document.querySelector(".player2 .score-num"),
 
 
     updateEndOfCurrentRound: function(round){
@@ -328,5 +328,14 @@ const roundResultController = {
     updateRoundResultScore: function(element, score){
         roundResultController[element].textContent = score;
     },
+
+    updateResultView: function() {
+        this.updateEndOfCurrentRound(gameController.rounds);
+        this.updateRoundResultBanner(gameController.roundWinner);
+        this.updateRoundResultName("player1Name", player1.name);
+        this.updateRoundResultName("player2Name", player2.name);
+        this.updateRoundResultScore("player1Score", player1.currentScore);
+        this.updateRoundResultScore("player2Score", player2.currentScore);
+    }
 }
 
