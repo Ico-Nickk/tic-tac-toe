@@ -303,6 +303,8 @@ gameGridDisplay.addEventListener("click", (event)=> {
     };
 });
 
+/*Round Result view*/
+
 const roundResultController = {
     winnerBanner: document.querySelector(".winnerBanner"),
 
@@ -342,4 +344,6 @@ const roundResultController = {
 
 const roundStartBtn = document.querySelector("#next-round-btn");
 roundStartBtn.addEventListener("click", () => viewController.showView("game"));
+
+/*Final Result view*/
 
