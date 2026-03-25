@@ -96,7 +96,6 @@ const gameController = {
     rounds: 1,
     roundWinner: "",
     gameWinner: "",
-    isRoundWinner: "",
     isPlayerOneTurn: false,
     currentPlayersTurn: player1,
 
@@ -107,13 +106,11 @@ const gameController = {
                     this.roundWinner = player1;
                     this.updateWinnerScore();
                     console.log("winner is player1");
-                    this.isRoundWinner = true;
                     break
                 case "OOO":
                     this.roundWinner = player2;
                     console.log("winner is player2");
                     this.updateWinnerScore();
-                    this.isRoundWinner = true;
                     break
                 default:
             };
@@ -177,8 +174,9 @@ const gameController = {
     },
     
     checkEndOfRound: function() {
-        if(this.isRoundWinner && this.rounds === 3) {
+        if(this.roundWinner != "" && this.rounds === 3) {
             this.checkGameWinner();
+            viewController.showView("final");
             console.log(`${this.gameWinner.name}`);
         }
     },
