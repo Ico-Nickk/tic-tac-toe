@@ -338,5 +338,8 @@ const roundResultController = {
         this.updateRoundResultScore("player1Score", player1.currentScore);
         this.updateRoundResultScore("player2Score", player2.currentScore);
     }
-}
+};
+
+const roundStartBtn = document.querySelector("#next-round-btn");
+roundStartBtn.addEventListener("click", () => viewController.showView("game"));
 
