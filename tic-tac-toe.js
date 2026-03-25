@@ -354,6 +354,8 @@ const roundResultController = {
     },
 
     startNewRound: function(){
+        gameBoard.resetGridSquares();
+        gameGrid.resetGameGrid();
         gameController.newRound();
         viewController.showView("game");
     }
