@@ -245,15 +245,23 @@ const viewController = {
 };
 
 const gameGrid = {
-    a1: document.querySelector("#a1"),
-    b1: document.querySelector("#b1"),
-    c1: document.querySelector("#c1"),
-    a2: document.querySelector("#a2"),
-    b2: document.querySelector("#b2"),
-    c2: document.querySelector("#c2"),
-    a3: document.querySelector("#a3"),
-    b3: document.querySelector("#b3"),
-    c3: document.querySelector("#c3"),
+    squares: {
+        a1: document.querySelector("#a1"),
+        b1: document.querySelector("#b1"),
+        c1: document.querySelector("#c1"),
+        a2: document.querySelector("#a2"),
+        b2: document.querySelector("#b2"),
+        c2: document.querySelector("#c2"),
+        a3: document.querySelector("#a3"),
+        b3: document.querySelector("#b3"),
+        c3: document.querySelector("#c3"),
+    },
+    resetGameGrid: function() {
+        Object.values(this.squares).forEach((square) => {
+            square.textContent = "";
+        });
+    },
+
 };
 
 const gameGridDisplay = document.querySelector(".game-grid");
