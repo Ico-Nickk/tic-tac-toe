@@ -206,6 +206,8 @@ const gameController = {
 const displayController = {
     bannerP1: document.getElementById("banner-p1"),
     bannerP2: document.getElementById("banner-p2"),
+    scoreP1: document.querySelector("#score-p1"),
+    scoreP2: document.querySelector("#score-p2"),
     roundCounter: document.querySelector(".roundCounter"),
     currentPlayersTurn: document.querySelector(".currentTurn"),
     toggleBanner: function(banner) {
@@ -228,6 +230,11 @@ const displayController = {
         square.textContent = player.marker;
         square.classList.add(player.marker);
     },
+
+    updatePlayerScores: function(){
+        this.scoreP1.textContent = `0${player1.getScore()}`;
+        this.scoreP2.textContent= `0${player2.getScore()}`;
+    }
 
 };
 
@@ -260,6 +267,7 @@ const gameGrid = {
         Object.values(this.squares).forEach((square) => {
             square.textContent = "";
             square.disabled = false;
+            square.classList.remove("X", "O");
         });
     },
 
@@ -359,6 +367,7 @@ const roundResultController = {
         gameGrid.resetGameGrid();
         gameController.newRound();
         viewController.showView("game");
+        displayController.updatePlayerScores();
     }
 };
 
