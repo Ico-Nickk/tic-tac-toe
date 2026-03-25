@@ -193,6 +193,7 @@ const gameController = {
 
     showRoundResults: function(){
         if(this.roundWinner != ""){
+            roundResultController.updateResultView();
             viewController.showView("round");
         };
     }
