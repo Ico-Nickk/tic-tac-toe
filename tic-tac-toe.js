@@ -179,6 +179,7 @@ const gameController = {
         if(this.roundWinner != "" && this.rounds === 3) {
             this.checkGameWinner();
             viewController.showView("final");
+            finalViewController.updateFinalView();
             console.log(`${this.gameWinner.name}`);
         }
     },
@@ -230,7 +231,7 @@ const displayController = {
     },
 
     updateCurrentPlayersTurn: function(){
-        this.currentPlayersTurn.textContent = `${gameController.currentPlayersTurn.name} Turn!`;
+        this.currentPlayersTurn.textContent = `${gameController.currentPlayersTurn.getPlayerName()} Turn!`;
     },
 
     updateRoundStatus: function(){
@@ -356,7 +357,7 @@ const roundResultController = {
         this.endOfCurrentRound.textContent = `Round ${gameController.getCurrentRound()} complete`;
     },
     updateRoundResultBanner: function(){
-        this.winnerBanner.childNodes[0].nodeValue = `${gameController.roundWinner.name} `;
+        this.winnerBanner.childNodes[0].nodeValue = `${gameController.roundWinner.getPlayerName()} `;
     },
     updateRoundResultName: function(element, Name){
         roundResultController[element].textContent = Name;
@@ -405,4 +406,31 @@ setupForm.addEventListener("submit", function(e){
     setupController.savePlayerNames();
     viewController.showView("game");  
     displayController.setPlayerNames();
-})
+    displayController.updateCurrentPlayersTurn();
+});
+
+/*final result view*/
+
+const finalViewController = {
+    winnerBanner: document.querySelector("#final-result-view h1"),
+
+    updateWinnerBanner: function(){
+        this.winnerBanner.childNodes[0].nodeValue = `${gameController.gameWinner.getPlayerName()} is the`;
+    },
+
+    player1name: document.querySelector("#final-result-view .player-label.player1"),
+
+    player2name: document.querySelector("#final-result-view .player-label.player2"),
+
+    player1score: document.querySelector("#final-result-view .score-num.player1"),
+
+    player2score: document.querySelector("#final-result-view .score-num.player2"),
+
+    updateFinalView: function(){
+        this.updateWinnerBanner();
+        this.player1name.textContent = player1.getPlayerName();
+        this.player2name.textContent = player2.getPlayerName();
+        this.player1score.textContent = player1.getScore();
+        this.player2score.textContent = player2.getScore();
+    },
+};
