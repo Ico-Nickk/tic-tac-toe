@@ -47,7 +47,7 @@ nav {
     backdrop-filter: blur(20px);
     padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: sticky;
     top: 0;
