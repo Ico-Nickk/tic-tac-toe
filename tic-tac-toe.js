@@ -389,6 +389,9 @@ const roundResultController = {
 const roundStartBtn = document.querySelector("#next-round-btn");
 roundStartBtn.addEventListener("click", () => roundResultController.startNewRound());
 
+const QuitBtnRoundView = document.querySelector("#round-result-view .btn-secondary");
+QuitBtnRoundView.addEventListener("click", () => window.location.reload());
+
 /*Setup view*/
 
 const setupController = {
