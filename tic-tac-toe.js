@@ -207,6 +207,8 @@ const gameController = {
     }
 };
 
+/*game view controller*/
+
 const displayController = {
     p1Name: document.querySelector("#display-p1"),
     p2Name: document.querySelector("#display-p2"),
@@ -250,6 +252,9 @@ const displayController = {
     }
 
 };
+
+const QuitBtnGameView = document.querySelector("#game-view .btn-secondary");
+QuitBtnGameView.addEventListener("click", () => window.location.reload());
 
 const viewController = {
     views: {
