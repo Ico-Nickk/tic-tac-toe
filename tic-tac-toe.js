@@ -437,3 +437,6 @@ const finalViewController = {
         this.player2score.textContent = player2.getScore();
     },
 };
+
+const playAgainBtn = document.querySelector("#final-result-view .btn-primary");
+playAgainBtn.addEventListener("click", () => window.location.reload());
