@@ -1,29 +1,31 @@
 const player1 = (()=> {
     let tag = "player1";
-    let name = "nick";
+    let name = "";
     let marker = "X";
     let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
     };
+    const getPlayerName = () => name;
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, getPlayerName};
 })();
 
 const player2 = (()=> {
     let tag = "player2";
-    let name = "judy";
+    let name = "";
     let marker = "O";
     let currentScore = 0;
     const setPlayerName = (val)=> {
         name = val;
     };
+    const getPlayerName = () => name;
     const getScore = () => currentScore;
     const addScore = () => { currentScore++;};
     const resetScore = () => currentScore = 0;
-    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag};
+    return {name, getScore, addScore, resetScore, setPlayerName, marker, tag, getPlayerName};
 })();
 
 const gameBoard = (()=>{
@@ -205,12 +207,20 @@ const gameController = {
 };
 
 const displayController = {
+    p1Name: document.querySelector("#display-p1"),
+    p2Name: document.querySelector("#display-p2"),
     bannerP1: document.getElementById("banner-p1"),
     bannerP2: document.getElementById("banner-p2"),
     scoreP1: document.querySelector("#score-p1"),
     scoreP2: document.querySelector("#score-p2"),
     roundCounter: document.querySelector(".roundCounter"),
     currentPlayersTurn: document.querySelector(".currentTurn"),
+
+    setPlayerNames: function(){
+        this.p1Name.textContent = `${player1.getPlayerName()}`;
+        this.p2Name.textContent = `${player2.getPlayerName()}`;
+    },
+
     toggleBanner: function(banner) {
         if(banner.classList.contains("active")){
             banner.classList.replace("active", "inactive");
@@ -358,8 +368,8 @@ const roundResultController = {
     updateResultView: function() {
         this.updateEndOfCurrentRound();
         this.updateRoundResultBanner();
-        this.updateRoundResultName("player1Name", player1.name);
-        this.updateRoundResultName("player2Name", player2.name);
+        this.updateRoundResultName("player1Name", player1.getPlayerName());
+        this.updateRoundResultName("player2Name", player2.getPlayerName());
         this.updateRoundResultScore("player1Score", player1.getScore());
         this.updateRoundResultScore("player2Score", player2.getScore());
     },
@@ -378,5 +388,21 @@ const roundResultController = {
 const roundStartBtn = document.querySelector("#next-round-btn");
 roundStartBtn.addEventListener("click", () => roundResultController.startNewRound());
 
-/*Final Result view*/
+/*Setup view*/
 
+const setupController = {
+    p1NameInput: document.querySelector("#p1-name"),
+    p2NameInput: document.querySelector("#p2-name"),
+    savePlayerNames: function(){
+        player1.setPlayerName(this.p1NameInput.value);
+        player2.setPlayerName(this.p2NameInput.value);
+    },
+};
+
+const setupForm = document.querySelector("#setup-form");
+setupForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    setupController.savePlayerNames();
+    viewController.showView("game");  
+    displayController.setPlayerNames();
+})
